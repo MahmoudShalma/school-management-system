@@ -24,19 +24,24 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 
-//==============================Translate all pages============================
+ //==============================Translate all pages============================
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
     ], function () {
 
-    //==============================dashboard============================
+     //==============================dashboard============================
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-    //==============================dashboard============================
+   //==============================dashboard============================
     Route::group(['namespace' => 'Grades'], function () {
         Route::resource('Grades', 'GradeController');
+    });
+
+    //==============================Classrooms============================
+    Route::group(['namespace' => 'Classrooms'], function () {
+        Route::resource('Classrooms', 'ClassroomController');
     });
 
 
